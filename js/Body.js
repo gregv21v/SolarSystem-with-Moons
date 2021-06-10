@@ -12,6 +12,7 @@ class Body {
      this._radius = mass
      this._velocity = velocity
      this._position = position
+     this._path = []
    }
 
    /**
@@ -50,12 +51,108 @@ class Body {
    attract(child) {
      let radius = dist(this._position.x, this._position.y, child._position.x, child._position.y)
      let force = this._position.copy().sub(child._position)
-     force.setMag( (Body.G * this._mass * child._mass) / (radius * radius))
+     force.setMag( (Universe.gravitationalConstant * this._mass * child._mass) / (radius * radius))
      child.applyForce(force);
    }
 
 
+   /************************************************************************
+                        Getters and Setters
+   ************************************************************************/
 
+   /**
+    * get id()
+    * @description gets the id of this body
+    */
+   get id() {
+     return this._id;
+   }
+
+   /**
+    * get position()
+    * @description gets the position of this body
+    */
+   get position() {
+     return this._position;
+   }
+
+   /**
+    * set position()
+    * @description sets the position of this body
+    * @param value the vector value to set this position to
+    */
+   set position(value) {
+     this._position = value
+   }
+
+
+   /**
+    * get velocity()
+    * @description gets the velocity of this body
+    */
+   get velocity() {
+     return this._velocity;
+   }
+
+   /**
+    * set velocity()
+    * @description sets the velocity of this body
+    * @param value the vector value to set this velocity to
+    */
+   set velocity(value) {
+     this._velocity = value
+   }
+
+   /**
+    * get acceleration()
+    * @description gets the acceleration of this body
+    */
+   get acceleration() {
+     return this._acceleration;
+   }
+
+   /**
+    * set acceleration()
+    * @description sets the acceleration of this body
+    * @param value the vector value to set this acceleration to
+    */
+   set acceleration(value) {
+     this._acceleration = value
+   }
+
+   /**
+    * get mass()
+    * @description gets the mass of this body
+    */
+   get mass() {
+     return this._mass;
+   }
+
+   /**
+    * set mass()
+    * @description sets the mass of this body
+    * @param value the vector value to set this mass to
+    */
+   set mass(value) {
+     this._mass = value
+   }
+
+   /**
+    * get radius()
+    * @description gets the radius of this body
+    */
+   get radius() {
+     return this._radius;
+   }
+
+   /**
+    * set radius()
+    * @description sets the radius of this body
+    * @param value the vector value to set this radius to
+    */
+   set radius(value) {
+     this._acceleration = value
+   }
 
 
 

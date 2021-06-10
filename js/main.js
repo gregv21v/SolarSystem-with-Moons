@@ -1,5 +1,5 @@
 let sun;
-let destabilize = 0.2;
+let settings;
 
 /**
   setup
@@ -8,6 +8,10 @@ let destabilize = 0.2;
 function setup() {
   createCanvas(windowWidth, windowHeight)
   sun = new Sun(120, createVector(width/2, height/2), createVector(0, 0))
+  gui = createGui("Settings");
+  gui.addObject(Universe)
+  //gui.addObject(sun)
+  //console.log(Universe.gravitationalConstant);
 }
 
 

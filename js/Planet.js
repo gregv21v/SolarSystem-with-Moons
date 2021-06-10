@@ -12,7 +12,7 @@ class Planet extends Body {
      this._moons = [];
 
      let moonCount = random(1, 3);
-     for (var i = 0; i < moonCount; i++) {
+     for (let i = 0; i < moonCount; i++) {
        // moon position
        let r = random(this._radius, this._radius + 10)
        let theta = random(TWO_PI)
@@ -20,12 +20,11 @@ class Planet extends Body {
 
 
        // moon velocity
-       let moonVelocity = moonPosition.copy()
+       let moonVelocity = this.position.copy()
        moonVelocity.rotate(HALF_PI) // rotate the position vector 90 deg
-       moonVelocity.setMag( sqrt(Body.G * this._mass / moonPosition.mag()) )
+       moonVelocity.setMag( sqrt( Universe.gravitationalConstant * this._mass / moonPosition.mag() ) )
 
-
-       var newMoon = new Moon(random(4, 6), moonPosition.add(this._position), moonVelocity)
+       let newMoon = new Moon(random(4, 6), moonPosition.add(this._position), moonVelocity)
        this._moons.push(newMoon)
      }
    }
@@ -39,8 +38,17 @@ class Planet extends Body {
      fill(73, 98, 156);
      ellipse(this._position.x, this._position.y, this._radius, this._radius)
 
-     for (var i = 0; i < this._moons.length; i++) {
+     for (let i = 0; i < this._moons.length; i++) {
        this._moons[i].show()
+     }
+
+     stroke("black")
+     strokeWeight(2)
+     this._path.push(this._position.copy())
+     if(this._path.length > 1) {
+       for (let i = 1; i < this._path.length; i++) {
+         line(this._path[i].x, this._path[i].y, this._path[i-1].x, this._path[i-1].y)
+       }
      }
    }
 

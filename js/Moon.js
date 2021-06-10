@@ -19,6 +19,16 @@ class Moon extends Body {
      noStroke();
      fill(163, 162, 0);
      ellipse(this._position.x, this._position.y, this._radius, this._radius)
+
+
+     stroke("black")
+     strokeWeight(1)
+     this._path.push(this._position.copy())
+     if(this._path.length > 1) {
+       for (let i = 1; i < this._path.length; i++) {
+         line(this._path[i].x, this._path[i].y, this._path[i-1].x, this._path[i-1].y)
+       }
+     }
    }
 
    /**
@@ -47,7 +57,7 @@ class Moon extends Body {
    attract(child) {
      let radius = dist(this._position.x, this._position.y, child._position.x, child._position.y)
      let force = this._position.copy().sub(child._position)
-     force.setMag( (Body.G * this._mass * child._mass) / (radius * radius))
+     force.setMag( (Universe.gravitationalConstant * this._mass * child._mass) / (radius * radius))
      child.applyForce(force);
    }
 

@@ -1,3 +1,3 @@
 class Universe {
-  static gravitationConstant = 1;
+  static gravitationalConstant = 2;
 }

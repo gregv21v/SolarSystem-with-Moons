@@ -1,5 +1,7 @@
 class Sun extends Body {
 
+  static destabilize = 0.1;
+
   /**
    * constructor()
    * @description constructs the body
@@ -21,8 +23,8 @@ class Sun extends Body {
        // planet velocity
        let planetVelocity = planetPosition.copy()
        planetVelocity.rotate(HALF_PI)
-       planetVelocity.setMag( sqrt(Body.G * this._mass / planetPosition.mag()) )
-       //planetVelocity.mult(random(1 - destabilize, 1 + destabilize))
+       planetVelocity.setMag( sqrt(Universe.gravitationalConstant * this._mass / planetPosition.mag()) )
+       planetVelocity.mult(random(1 - Sun.destabilize, 1 + Sun.destabilize))
 
        this._planets.push(
          new Planet(
@@ -42,6 +44,8 @@ class Sun extends Body {
      fill(120, 10, 21);
      ellipse(this._position.x, this._position.y, this._radius, this._radius)
 
+     stroke("black")
+     strokeWeight(1)
      for (var i = 0; i < this._planets.length; i++) {
        this._planets[i].show()
      }
